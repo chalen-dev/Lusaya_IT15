@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -10,9 +11,13 @@ class PostsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $posts = Post::with('category')->get();
+        return view(
+            'posts.index',
+            compact('posts')
+        );
     }
 
     /**
@@ -20,21 +25,29 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::pluck('name', 'id');
+        return view('posts.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'text' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        Post::create($validated);
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Posts $posts)
+    public function show(Post $posts)
     {
         //
     }
@@ -42,7 +55,7 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Posts $posts)
+    public function edit(Post $posts)
     {
         //
     }
@@ -50,7 +63,7 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, Post $posts)
     {
         //
     }
@@ -58,7 +71,7 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Posts $posts)
+    public function destroy(Post $posts)
     {
         //
     }
