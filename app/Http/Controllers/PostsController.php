@@ -41,38 +41,58 @@ class PostsController extends Controller
 
         return redirect()
             ->route('posts.index')
+            ->withInput()
             ->with('success', 'Post created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $posts)
+    public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $posts)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::pluck('name', 'id');
+        return view('posts.edit',
+            compact([
+                'post',
+                'categories'
+            ])
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $posts)
+    public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'text' => 'required',
+            'category_id' => 'required',
+        ]);
+        $post->update($validated);
+
+        return redirect()
+            ->route('posts.index')
+            ->withInput()
+            ->with('success', 'Post edited successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $posts)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post has been deleted successfully.');
     }
 }

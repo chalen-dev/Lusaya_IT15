@@ -17,22 +17,22 @@ class PostSeeder extends Seeder
             [
                 'title' => 'Hellow',
                 'text' => 'Welcome here',
-                'category_id' => 1,
+                'category_id' => 2,
             ],
             [
                 'title' => 'Hi',
                 'text' => 'Welcome here',
-                'category_id' => 1,
+                'category_id' => 3,
             ],
             [
                 'title' => 'Musta',
                 'text' => 'Welcome here',
-                'category_id' => 1,
+                'category_id' => 4,
             ],
             [
                 'title' => 'Yow',
                 'text' => 'Welcome here',
-                'category_id' => 1,
+                'category_id' => 5,
             ],
 
         ];

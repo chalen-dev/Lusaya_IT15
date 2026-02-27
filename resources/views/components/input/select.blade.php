@@ -2,6 +2,7 @@
     'id',
     'name',
     'label',
+    'value' => 1,
     'options' => []
 ])
 
@@ -11,8 +12,8 @@
     </label>
     <br>
     <select id="{{$id}}" name="{{$name}}" {{$attributes}}>
-        @foreach($options as $value => $text)
-            <option value="{{$value}}">
+        @foreach($options as $val => $text)
+            <option value="{{$value}}" @selected(old($name, $value) == $val || ($value ?? 1) == $val)>
                 {{$text}}
             </option>
         @endforeach

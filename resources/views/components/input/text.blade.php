@@ -1,6 +1,7 @@
 @props([
     'label',
     'name',
+    'value' => null,
     'class' => null,
     'attributes' => null,
 ])
@@ -11,6 +12,7 @@
         type="text"
         class="{{$class}}"
         name="{{$name}}"
+        value="{{$value}}"
         {{$attributes}}
     >
     @error($name)

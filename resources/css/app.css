@@ -16,5 +16,40 @@ body{
 }
 
 * {
-    border: 1px solid red;
+    outline: 1px solid red;
+    list-style-type: none;
+}
+
+li{
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.no-scrollbar {
+    overflow: auto; /* Enables scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+textarea{
+    resize: none;
+}
+
+.gradient-text {
+    /* Fallback color */
+    color: #2a2c9b;
+
+    /* Gradient background */
+    background: linear-gradient(90deg,rgba(4, 0, 255, 1) 28%, rgba(255, 115, 0, 1) 69%, rgba(251, 255, 0, 1) 100%);
+
+    /* Clip background to text */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Make text transparent to show gradient */
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
 }
